@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollabDocs - Real-time Collaborative Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- User Name Modal -->
+    <div class="modal" id="nameModal">
+        <div class="modal-content">
+            <h2>Welcome to CollabDocs</h2>
+            <p>Enter your name to start collaborating:</p>
+            <div class="form-group">
+                <input type="text" id="userNameInput" class="form-control" placeholder="Your name" maxlength="50">
+            </div>
+            <button class="btn btn--primary btn--full-width" id="setNameBtn">Start Collaborating</button>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>CollabDocs</h1>
+                <p>Real-time collaborative platform</p>
+            </div>
+            <div class="user-info">
+                <span class="user-name" id="currentUserName"></span>
+                <button class="btn btn--outline btn--sm" id="changeNameBtn">Change Name</button>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-actions">
+                <button class="btn btn--primary" id="createDocBtn">
+                    <span>+</span>
+                    Create New Document
+                </button>
+            </div>
+
+            <div class="documents-grid" id="documentsGrid">
+                <!-- Documents will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor Interface -->
+    <div class="editor-container hidden" id="editorContainer">
+        <div class="editor-header">
+            <div class="editor-header-left">
+                <button class="btn btn--outline btn--sm" id="backToDashboard">← Back to Documents</button>
+                <input type="text" class="document-title" id="documentTitle" placeholder="Untitled Document">
+            </div>
+            <div class="editor-header-right">
+                <div class="online-users" id="onlineUsers"></div>
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-indicator online"></span>
+                    <span>Connected</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-toolbar">
+            <button class="toolbar-btn" id="boldBtn" title="Bold (Ctrl+B)"><strong>B</strong></button>
+            <button class="toolbar-btn" id="italicBtn" title="Italic (Ctrl+I)"><em>I</em></button>
+            <button class="toolbar-btn" id="underlineBtn" title="Underline (Ctrl+U)"><u>U</u></button>
+            <div class="toolbar-separator"></div>
+            <button class="toolbar-btn" id="saveBtn" title="Save (Ctrl+S)">Save</button>
+            <button class="toolbar-btn" id="exportBtn" title="Export">Export</button>
+            <button class="toolbar-btn btn--danger" id="deleteDocBtn" title="Delete Document">Delete</button>
+        </div>
+
+        <div class="editor-main">
+            <div class="editor-workspace">
+                <div class="document-editor" id="documentEditor" contenteditable="true" spellcheck="true">
+                    <!-- Document content will be loaded here -->
+                </div>
+                <div class="typing-indicators" id="typingIndicators"></div>
+            </div>
+        </div>
+
+        <div class="editor-footer">
+            <div class="document-stats">
+                <span id="charCount">0 characters</span>
+                <span class="separator">•</span>
+                <span id="wordCount">0 words</span>
+            </div>
+            <div class="last-saved" id="lastSaved">Saved</div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal hidden" id="deleteModal">
+        <div class="modal-content">
+            <h3>Delete Document</h3>
+            <p>Are you sure you want to delete "<span id="deleteDocTitle"></span>"? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn--outline" id="cancelDeleteBtn">Cancel</button>
+                <button class="btn btn--primary btn--danger" id="confirmDeleteBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast hidden" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
